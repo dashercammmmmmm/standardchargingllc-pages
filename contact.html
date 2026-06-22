@@ -94,19 +94,15 @@ a[href]:not([href^='#']):not([href^='mailto']):not([href^='tel']) { transition: 
 }
 .nav-cta:hover { background: var(--sc-green-darker) !important; color:#fff !important; transform: translateY(-1px); }
 .nav-burger {
-  display: block; background: rgba(255,255,255,0.82); border: 1px solid var(--sc-line); border-radius: 999px; width: 44px; height: 44px;
-  position: relative; cursor: pointer; z-index: 110;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: rgba(255,255,255,0.92); border: 1px solid var(--sc-line); border-radius: 999px;
+  min-width: 0; width: auto; height: 44px; min-height: 44px; padding: 0 14px;
+  position: relative; cursor: pointer; z-index: 110; color: var(--sc-ink);
+  font-size: 14px; font-weight: 700; letter-spacing: -0.01em;
+  box-shadow: 0 10px 28px rgba(15,23,42,0.08);
 }
-.nav-burger span {
-  position: absolute; left: 6px; right: 6px; height: 1.5px;
-  background: var(--sc-ink); transition: all 0.3s var(--ease); transform-origin: center;
-}
-.nav-burger span:nth-child(1) { top: 12px; }
-.nav-burger span:nth-child(2) { top: 18px; }
-.nav-burger span:nth-child(3) { top: 24px; }
-.nav-burger.open span:nth-child(1) { top: 18px; transform: rotate(45deg); }
-.nav-burger.open span:nth-child(2) { opacity: 0; }
-.nav-burger.open span:nth-child(3) { top: 18px; transform: rotate(-45deg); }
+.nav-burger:hover, .nav-burger:focus-visible { border-color: var(--sc-green); outline: none; }
+.nav-burger.open { background: var(--sc-green); color: #052e16; border-color: var(--sc-green); }
 .mobile-menu {
   position: fixed; inset: 0; background: var(--sc-cream); z-index: 1000;
   display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
@@ -387,9 +383,7 @@ body.menu-open main, body.menu-open .hero, body.menu-open .counter-strip, body.m
     <a href="about.html">About</a>
     <a href="partners.html#apply" class="nav-cta">Become a sponsor</a>
   </div>
-  <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">☰ Menu</button>
 </nav>
 <div class="mobile-menu" id="mmenu">
   <a href="how-it-works.html">How it works</a>
