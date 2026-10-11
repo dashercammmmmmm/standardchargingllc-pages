@@ -67,6 +67,15 @@
     if (field) field.remove();
   }
 
+  function passesBotCheck(form) {
+    const honeypot = form.querySelector('[name="_honey"]');
+    if (honeypot && String(honeypot.value || '').trim()) {
+      setStatus(form, 'Thanks — your message was sent.');
+      return false;
+    }
+    return true;
+  }
+
   function confirmMissingFields(form) {
     const missing = missingRequiredFields(form);
     if (!missing.length) {
@@ -111,6 +120,7 @@
       form.noValidate = true;
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (!passesBotCheck(form)) return;
         if (!confirmMissingFields(form)) return;
         setStatus(form, 'Sending…');
         try {
