@@ -454,14 +454,21 @@ body.menu-open main, body.menu-open .hero, body.menu-open .counter-strip, body.m
     <div class="sec-eyebrow rev">Apply</div>
     <h2 class="sec-hed bal rev">Tell us about <em>your business.</em></h2>
     <p class="sec-lede rev">Every sponsorship starts with a 30-minute conversation. Fill out the form and we&rsquo;ll be back in touch within two business days.</p>
-    <form style="max-width:720px;margin-top:60px" onsubmit="event.preventDefault();this.innerHTML='<p style=\'font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--sc-green);letter-spacing:-0.02em\'>Thank you. We\'ll be in touch within two business days.</p>'">
-      <div class="form-group"><label class="form-label">Business name</label><input class="form-input" type="text" required></div>
-      <div class="form-group"><label class="form-label">Your name</label><input class="form-input" type="text" required></div>
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" required></div>
-      <div class="form-group"><label class="form-label">City or region</label><input class="form-input" type="text" placeholder="Where should we explore a fit?"></div>
-      <div class="form-group"><label class="form-label">Tier of interest</label><select class="form-select"><option>Not sure yet &mdash; help me figure it out</option><option>Bronze / starter fit</option><option>Silver / growth fit</option><option>Gold / deeper local presence</option><option>Platinum / custom program</option></select></div>
-      <div class="form-group"><label class="form-label">Tell us about your business</label><textarea class="form-textarea" placeholder="What do you do? Where are you located? Why does this feel like a fit?"></textarea></div>
+    <form style="max-width:720px;margin-top:60px" class="stacked-form" novalidate data-email-form data-endpoint="https://formsubmit.co/ajax/cam@standardchargingllc.com" action="https://formsubmit.co/ajax/cam@standardchargingllc.com" method="POST" aria-describedby="partnerMsg">
+      <input type="hidden" name="_subject" value="Standard Charging - Sponsorship Interest">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_blacklist" value="viagra, cialis, casino, crypto, bitcoin, seo service, backlinks, guest post, telegram, whatsapp, adult content, payday loan, forex">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://standardchargingllc.com/pages/sponsor-thank-you.html">
+      <label class="sr-only" aria-hidden="true">Leave this blank<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+      <div class="form-group"><label class="form-label" for="partner-business-name">Business name</label><input class="form-input" id="partner-business-name" name="business_name" type="text" autocomplete="organization" required></div>
+      <div class="form-group"><label class="form-label" for="partner-contact-name">Your name</label><input class="form-input" id="partner-contact-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="form-group"><label class="form-label" for="partner-email">Email</label><input class="form-input" id="partner-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="form-group"><label class="form-label" for="partner-region">City or region</label><input class="form-input" id="partner-region" name="city_or_region" type="text" autocomplete="address-level2" placeholder="Where should we explore a fit?"></div>
+      <div class="form-group"><label class="form-label" for="partner-tier">Tier of interest</label><select class="form-select" id="partner-tier" name="tier_of_interest"><option>Not sure yet — help me figure it out</option><option>Bronze / starter fit</option><option>Silver / growth fit</option><option>Gold / deeper local presence</option><option>Platinum / custom program</option></select></div>
+      <div class="form-group"><label class="form-label" for="partner-message">Tell us about your business</label><textarea class="form-textarea" id="partner-message" name="message" placeholder="What do you do? Where are you located? Why does this feel like a fit?"></textarea></div>
       <button type="submit" class="btn">Send application <svg class="arr" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <p id="partnerMsg" class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -574,6 +581,6 @@ body.menu-open main, body.menu-open .hero, body.menu-open .counter-strip, body.m
   });
 })();
 </script>
-<script src="config.js"></script><script src="assets/cookie-consent.js"></script><!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "54a82127d07846c399b56ae65d8fdf66"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="config.js"></script><script src="site-forms.js"></script><script src="assets/cookie-consent.js"></script><!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "54a82127d07846c399b56ae65d8fdf66"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

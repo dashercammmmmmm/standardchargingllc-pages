@@ -96,6 +96,37 @@
     return true;
   }
 
+  function pageKey() {
+    try {
+      return `${window.location.origin}${window.location.pathname}`;
+    } catch (_) {
+      return 'standard-charging-form';
+    }
+  }
+
+  function canSubmitNow(form) {
+    const now = Date.now();
+    const page = pageKey();
+    const lastSubmitted = Number(sessionStorage.getItem(`${page}:form-submitted-at`) || 0);
+    if (lastSubmitted && now - lastSubmitted < 60_000) {
+      setStatus(form, 'Thanks — your message was sent. Please wait a minute before sending another.');
+      return false;
+    }
+    const activatedAt = Number(form.dataset.formActivatedAt || now);
+    form.dataset.formActivatedAt = String(activatedAt);
+    if (now - activatedAt < 1_500) {
+      setStatus(form, 'Please take a moment to review your message before sending.');
+      return false;
+    }
+    return true;
+  }
+
+  function markSubmitted() {
+    try {
+      sessionStorage.setItem(`${pageKey()}:form-submitted-at`, String(Date.now()));
+    } catch (_) {}
+  }
+
   async function submitForm(form) {
     const endpoint = form.dataset.endpoint || form.getAttribute('action') || defaultEndpoint;
     const response = await fetch(endpoint, {
@@ -117,14 +148,17 @@
     document.querySelectorAll('form[data-email-form]').forEach((form) => {
       if (form.dataset.emailFormBound === 'true') return;
       form.dataset.emailFormBound = 'true';
+      form.dataset.formActivatedAt = String(Date.now());
       form.noValidate = true;
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!passesBotCheck(form)) return;
+        if (!canSubmitNow(form)) return;
         if (!confirmMissingFields(form)) return;
         setStatus(form, 'Sending…');
         try {
           await submitForm(form);
+          markSubmitted();
           const next = form.querySelector('input[type="hidden"][name="_next"]')?.value;
           form.reset();
           setStatus(form, 'Thanks — your message was sent.');
